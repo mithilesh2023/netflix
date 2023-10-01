@@ -8,9 +8,9 @@ import { RiThumbDownFill } from 'react-icons/ri'
 import { BiChevronDown } from 'react-icons/bi'
 import { BsCheck } from 'react-icons/bs'
 import video from '../images/videoplayback.mp4'
-import img from '../images/card.jpg'
+import imgs from '../images/card.jpg'
 
-const Card = () => {
+const Card = ({movieData}) => {
     const [onHoverd, setOnHovered] = useState(false)
     const navigate = useNavigate()
     return (
@@ -19,15 +19,15 @@ const Card = () => {
         onMouseEnter={() => setOnHovered(true)}
         onMouseLeave={() => setOnHovered(false)}
         >
-            <img src={img} alt="poster" onClick={()=>navigate('/player')}/>
+            <img src={`https://image.tmdb.org/t/p/w500${movieData.image}`} alt="poster" onClick={()=>navigate('/player')}/>
             {onHoverd && (
                 <div className="hover">
                     <div className="image-video-wrapper">
-                    <img src={img} alt="poster" onClick={()=>navigate('/player')}/>
+                    <img src={`https://image.tmdb.org/t/p/w500${movieData.image}`} alt="poster" onClick={()=>navigate('/player')}/>
                     <video src={video} autoPlay controls loop/>
                     </div>
                     <div className="info-container">
-                        <h3 className='movieName' onClick={()=>navigate('/player')}>Red Notice</h3>
+                        <h3 className='movieName' onClick={()=>navigate('/player')}>{movieData.name}</h3>
                         <div className="icons">
                             <div className="controls">
                                 <IoPlayCircleSharp
@@ -45,10 +45,9 @@ const Card = () => {
                         </div>
                         <div className="genre">
                         <ul>
-                            <li>Action</li>
-                            <li>Action</li>
-                            <li>Action</li>
-                            <li>Action</li>
+                            {movieData.genres.map((genres)=>{
+                                <li>{genres}</li>
+                            })}
                         </ul>
                         </div>
                     </div>
@@ -61,16 +60,16 @@ const Card = () => {
 }
 const CardContainer = styled.div`
 margin-top:1rem;
-max-width:230px;/
 width:230px;
 height:100%;
 cursor:pointer;
 position:relative;
 background-color:red;
+
 img{
     border-radius:0.2rem;
     width:230px;
-    height:100%;
+    height:230px;
     z-index:10;
 }
 .hover{
@@ -91,6 +90,7 @@ img{
             width:100%;
             height:150px;
             border-radius:0.3rem;
+            object-fit:cover;
             top:0;
             z-index:4;
             position:absolute;
@@ -127,7 +127,7 @@ img{
         border:0.1rem solid white;
         border-radius:50%;
         font-size:1.5rem;
-        transition:0.3 s ease-in-out;
+        transition:0.3s ease-in-out;
     }&:hover{
         color:#b8b8b8;
     }
