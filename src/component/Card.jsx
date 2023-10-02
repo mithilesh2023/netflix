@@ -10,7 +10,7 @@ import { BsCheck } from 'react-icons/bs'
 import video from '../images/videoplayback.mp4'
 import imgs from '../images/card.jpg'
 
-const Card = ({movieData}) => {
+export default React.memo(function Card({movieData}){
     const [onHoverd, setOnHovered] = useState(false)
     const navigate = useNavigate()
     return (
@@ -57,14 +57,14 @@ const Card = ({movieData}) => {
           
         </CardContainer>
     )
-}
+})
 const CardContainer = styled.div`
 margin-top:1rem;
 width:230px;
 height:100%;
 cursor:pointer;
 position:relative;
-background-color:red;
+// background-color:red;
 
 img{
     border-radius:0.2rem;
@@ -150,5 +150,3 @@ img{
 }
 
 `
-
-export default Card

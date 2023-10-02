@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import MovieSlider from './MovieSlider'
 
-const SliderContainer = ({movies}) => {
+const SliderContainer = ({movies,title}) => {
     const getMoviesBetween=(start,end)=>{
         return movies.slice(start,end)
     }
